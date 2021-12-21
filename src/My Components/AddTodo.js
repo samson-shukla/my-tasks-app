@@ -9,7 +9,12 @@ export const AddTodo = ({addTodo}) => {
         if(!title){
             alert("Title cannot be blank");
         }
-        addTodo(title, desc);
+        else{
+            addTodo(title, desc);
+        }
+
+        setTitle("");
+        setDesc("");
     }
     return (
         <div className='container my-5'>
