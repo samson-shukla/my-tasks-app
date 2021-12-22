@@ -2,26 +2,25 @@ import React from "react";
 
 export const About = () => {
   let aboutStyle = {
-    minHeight: "85vh",
     width: "87%",
+    minHeight: "70vh",
     textAlign: "justify",
     display: "flex",
     flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: "center"
   };
   let cursorStyle = {
     cursor: "pointer",
-    color: "blue",
+    color: "yellow"
   };
   const handleClick = () => {
     window.open("https://github.com/samson-shukla/MyTasks-App");
   };
 
   return (
-    <div className="container" style={aboutStyle}>
+    <div className="container my-5" style={aboutStyle}>
       <p>
-        <h3 className="my-5">About this Project</h3>
+        <h3 className="my-2">About this Project</h3>
         <h6>Hey There!</h6>
         After working some time with HTML, CSS and Vanilla JavaScript I am
         finally starting to learn ReactJs. This is just a basic Tasks / Todo app

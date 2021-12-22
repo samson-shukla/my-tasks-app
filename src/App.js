@@ -53,22 +53,30 @@ function App() {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
 
+  let mainStyle = {
+    height: "100vh",
+    backgroundColor: "#1F1C2C"
+  };
+
   return (
-    <>      
+    <>
       <BrowserRouter>
-      <Header title="MyTasks" />
-        <Routes>
-          <Route
-            path="/"
-            element={
+        <div style={mainStyle}>
+          <Header title="MyTasks" />
+          <Routes>
+            <Route
+              path="/"
+              element={
                 <>
                   <AddTodo addTodo={addTodo} />
                   <Todos todos={todos} onDelete={onDelete} />
-                </>}
-          />
-          <Route path='/About' element={<About/>}/>
-        </Routes>
-        <Footer />
+                </>
+              }
+            />
+            <Route path="/About" element={<About />} />
+          </Routes>
+          <Footer />
+        </div>
       </BrowserRouter>
     </>
   );

@@ -4,6 +4,7 @@
   box-sizing: content-box;
   overflow: scroll;
   overflow-x: hidden;
+  color: white;
 }
 ::-webkit-scrollbar {
   width: 0;  /* Remove scrollbar space */
