@@ -1,28 +1,31 @@
-import './App.css';
-import Header from './My Components/Header';
-import {Footer} from "./My Components/Footer"; //Using {} bevause Footer is not Export default
-import {Todos} from "./My Components/Todos";
-import React, { useState, useEffect } from 'react';
-import {AddTodo} from "./My Components/AddTodo";
+import React, { useState, useEffect } from "react";
+import "./App.css";
+import Header from "./My Components/Header";
+import { Footer } from "./My Components/Footer"; //Using {} bevause Footer is not Export default
+import { Todos } from "./My Components/Todos";
+import { AddTodo } from "./My Components/AddTodo";
+import { About } from "./My Components/About";
+
+import { BrowserRouter, Routes, Route } from "react-router-dom"; //Using React Router v6
 
 function App() {
-  let initTodo;  
-  if(localStorage.getItem("todos") === null){
+  let initTodo;
+  if (localStorage.getItem("todos") === null) {
     initTodo = [];
-  }
-  else{
+  } else {
     initTodo = JSON.parse(localStorage.getItem("todos"));
   }
-  // const [todos, setTodos] = useState([]);
 
-  const onDelete = (todo) =>{
+  const onDelete = (todo) => {
     console.log("I am on Delete of todo ", todo.sno);
 
-    setTodos(todos.filter((e)=>{
-      return e!==todo;
-    }));
+    setTodos(
+      todos.filter((e) => {
+        return e !== todo;
+      })
+    );
 
-    if(localStorage.getItem("todos")){
+    if (localStorage.getItem("todos")) {
       localStorage.setItem("todos", JSON.stringify(todos));
     }
   };
@@ -30,33 +33,43 @@ function App() {
   const addTodo = (title, desc) => {
     console.log("Adding a Todo ", title, desc);
     let sno;
-    if(todos.length===0){
+    if (todos.length === 0) {
       sno = 1;
-    }
-    else{
+    } else {
       sno = todos[todos.length - 1].sno + 1;
     }
 
     const myTodo = {
       sno: sno,
       title: title,
-      desc: desc
+      desc: desc,
     };
     setTodos([...todos, myTodo]);
     console.log(myTodo);
-  }
+  };
 
   const [todos, setTodos] = useState(initTodo);
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
-  }, [todos])
+  }, [todos]);
 
-  return (     
-    <>
-    <Header title = "MyTasks"/>
-    <AddTodo addTodo = {addTodo}/>
-    <Todos todos = {todos} onDelete = {onDelete}/>
-    <Footer/>
+  return (
+    <>      
+      <BrowserRouter>
+      <Header title="MyTasks" />
+        <Routes>
+          <Route
+            path="/"
+            element={
+                <>
+                  <AddTodo addTodo={addTodo} />
+                  <Todos todos={todos} onDelete={onDelete} />
+                </>}
+          />
+          <Route path='/About' element={<About/>}/>
+        </Routes>
+        <Footer />
+      </BrowserRouter>
     </>
   );
 }
